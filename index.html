@@ -1,17 +1,82 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>(put name here)</title>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syed Akram's Terminal Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <script type="text/javascript" src="assets/js/index.js">
-  </script>
-  <div id="console"></div>
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="buttons">
+        <span class="close"></span>
+        <span class="minimize"></span>
+        <span class="maximize"></span>
+      </div>
+      <div class="title">Syed Akram's Terminal Portfolio</div>
+    </div>
+    <div class="terminal-body">
+      <p class="command">Welcome to Syed Akram's Portfolio</p>
+      <p class="output">Type 'help' to see the list of available commands.</p>
+      <p class="prompt">> <span class="input" contenteditable="true"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const commands = {
+      help: 'Available commands: about, experience, projects, education, skills, contact',
+      about: `I am an electronics engineer specializing in FPGA architecture and control systems. Currently, I optimize powertrains at Bosch and develop open-source tools to advance semiconductor simulations and control methodologies. My passion lies in bridging the gap between hardware and software to create efficient and innovative solutions.`,
+      experience: `Powertrain Calibration Engineer at Bosch (2021 – Present):
+- Optimized powertrain performance by developing advanced embedded algorithms, leading to a 15% increase in fuel efficiency.
+- Implemented real-time calibration techniques, reducing emission levels by 10%.
+- Collaborated with cross-functional teams to integrate model-based control strategies, enhancing system responsiveness and reliability.`,
+      projects: `1. SemiX: A Comprehensive Semiconductor Physics Library
+- Developed a detailed simulation tool modeling diodes, transistors, and MOSFETs with deep material-level accuracy.
+- Enabled researchers to predict device behavior under various conditions, facilitating the design of more efficient semiconductors.
+- [GitHub Repository](https://github.com/yourusername/SemiX)
+
+2. ControlX: An Intuitive Control Systems Simulation Library
+- Created a Python library for simulating and visualizing control systems, supporting PID, LQR, and adaptive control strategies.
+- Provided engineers with tools to design and test control algorithms in a user-friendly environment.
+- [GitHub Repository](https://github.com/yourusername/ControlX)
+
+3. eMachineX: Electric Machine and Inverter Simulation Tool
+- Designed a simulation platform supporting various motor types, including DC, BLDC, and PMSM, as well as inverter modeling.
+- Assisted in the analysis and optimization of electric machine performance, contributing to advancements in electric vehicle technology.
+- [GitHub Repository](https://github.com/yourusername/eMachineX)
+
+4. FPGA-Based Model Predictive Control: Real-Time Control Implementation
+- Developed a fully synthesized FPGA design for real-time Model-Based Predictive Control, achieving ultra-low-latency control for embedded applications.
+- Enhanced system stability and performance in applications such as autonomous driving and industrial automation.
+- [GitHub Repository](https://github.com/yourusername/FPGA-MPC)`,
+      education: `Bachelor of Engineering in Electronics & Communication Engineering
+PSG College of Technology, Coimbatore
+CGPA: 9.1
+- Relevant Coursework: Digital Signal Processing, Control Systems, VLSI Design, Embedded Systems
+- Projects: Designed a low-power FIR filter using VHDL; Developed a microcontroller-based temperature monitoring system.`,
+      skills: `- FPGA & RTL Design: Proficient in Verilog, SystemVerilog, and VHDL; experienced with tools like Vivado and Quartus.
+- Control Systems: Expertise in designing and implementing control strategies including PID, LQR, and Model Predictive Control.
+- Programming: Advanced skills in Python, C/C++, and MATLAB for simulation and algorithm development.
+- Embedded Systems: Strong background in microcontroller programming and real-time system design.
+- Simulation Tools: Experienced with SPICE, MATLAB/Simulink, and other circuit and system simulation platforms.`,
+      contact: `Email: [youremail@example.com](mailto:youremail@example.com)
+LinkedIn: [linkedin.com/in/syedakram](https://linkedin.com/in/syedakram)
+GitHub: [github.com/yourusername](https://github.com/yourusername)
+YouTube: [Engineered (My Channel)](https://youtube.com/yourchannel)`
+    };
+
+    document.querySelector('.input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const input = this.innerText.trim();
+        const output = commands[input] || `'${input}' is not recognized as a command. Type 'help' for a list of available commands.`;
+        const terminalBody = document.querySelector('.terminal-body');
+        terminalBody.innerHTML += `<p class="command">${input}</p><p class="output">${output}</p><p class="prompt">> <span class="input" contenteditable="true"></span></p>`;
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+        this.remove();
+        terminalBody.querySelector('.input').focus();
+      }
+    });
   </script>
 </body>
-
 </html>
